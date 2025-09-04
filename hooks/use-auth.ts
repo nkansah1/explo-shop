@@ -85,7 +85,7 @@ export const useAuth = create<AuthState>()(
             email,
             password,
             options: {
-              emailRedirectTo: `${window.location.origin}/auth/callback`,
+              emailRedirectTo: typeof window !== 'undefined' ? `${window.location.origin}/auth/callback` : `https://explo-shop.vercel.app/auth/callback`,
               data: {
                 full_name: name,
               },
@@ -205,7 +205,7 @@ export const useAuth = create<AuthState>()(
             type: "signup",
             email: email,
             options: {
-              emailRedirectTo: `${window.location.origin}/auth/callback`,
+              emailRedirectTo: typeof window !== 'undefined' ? `${window.location.origin}/auth/callback` : `https://explo-shop.vercel.app/auth/callback`,
             },
           })
 

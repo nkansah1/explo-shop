@@ -37,7 +37,7 @@ function VerifyEmailContent() {
         type: "signup",
         email: email,
         options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          emailRedirectTo: typeof window !== 'undefined' ? `${window.location.origin}/auth/callback` : `https://explo-shop.vercel.app/auth/callback`,
         },
       })
 
