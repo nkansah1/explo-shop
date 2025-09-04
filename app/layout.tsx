@@ -9,7 +9,6 @@ import { AuthErrorBoundary } from '@/components/auth-error-boundary'
 import { CartProvider } from '@/components/cart-provider'
 import { DevConfigCheck } from '@/components/dev-config-check'
 import { DeploymentDebug } from '@/components/deployment-debug'
-import { AuthDiagnostics } from '@/components/auth-diagnostics'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -39,7 +38,6 @@ export default function RootLayout({
                 <Toaster />
                 <DevConfigCheck />
                 <DeploymentDebug />
-                <AuthDiagnostics />
               </CartProvider>
             </AuthProvider>
           </AuthErrorBoundary>
