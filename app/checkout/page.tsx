@@ -22,6 +22,9 @@ import { useToast } from "@/hooks/use-toast"
 import { formatGHS, convertUSDToGHS } from "@/lib/utils"
 import { processPayment, type CardDetails, type PaymentRequest } from "@/lib/payment"
 
+// Force dynamic rendering for checkout page to avoid SSR issues
+export const dynamic = 'force-dynamic'
+
 export default function CheckoutPage() {
   const { items, getTotalPrice, createOrder } = useCart()
   const { user } = useAuth()
