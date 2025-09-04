@@ -15,6 +15,16 @@ export function Header() {
 
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0)
 
+  const handleLogout = async () => {
+    try {
+      console.log('Header: Logout button clicked')
+      await logout()
+      console.log('Header: Logout completed successfully')
+    } catch (error) {
+      console.error('Header: Logout failed:', error)
+    }
+  }
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between px-4">
@@ -79,7 +89,7 @@ export function Header() {
                   <User className="h-5 w-5" />
                 </Button>
               </Link>
-              <Button variant="ghost" size="sm" onClick={logout}>
+              <Button variant="ghost" size="sm" onClick={handleLogout}>
                 Logout
               </Button>
             </div>

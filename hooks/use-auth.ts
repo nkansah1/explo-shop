@@ -40,6 +40,7 @@ export const useAuth = create<AuthState>()(
 
           if (error) {
             console.error("Login error:", error.message)
+            console.error("Full error object:", error)
             set({ isLoading: false })
             return false
           }
@@ -139,9 +140,24 @@ export const useAuth = create<AuthState>()(
       },
 
       logout: async () => {
-        const supabase = createClient()
-        await supabase.auth.signOut()
-        set({ user: null })
+        try {
+          console.log('Starting logout process...')
+          const supabase = createClient()
+          const { error } = await supabase.auth.signOut()
+          
+          if (error) {
+            console.error('Logout error:', error)
+            // Still clear user state even if signOut fails
+          } else {
+            console.log('Logout successful')
+          }
+          
+          set({ user: null })
+        } catch (error) {
+          console.error('Logout exception:', error)
+          // Always clear user state on logout attempt
+          set({ user: null })
+        }
       },
 
       checkAuth: async () => {

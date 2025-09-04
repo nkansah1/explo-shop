@@ -5,8 +5,11 @@ import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
 import { AuthProvider } from '@/components/auth-provider'
+import { AuthErrorBoundary } from '@/components/auth-error-boundary'
 import { CartProvider } from '@/components/cart-provider'
 import { DevConfigCheck } from '@/components/dev-config-check'
+import { DeploymentDebug } from '@/components/deployment-debug'
+import { AuthDiagnostics } from '@/components/auth-diagnostics'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -29,13 +32,17 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AuthProvider>
-            <CartProvider>
-              {children}
-              <Toaster />
-              <DevConfigCheck />
-            </CartProvider>
-          </AuthProvider>
+          <AuthErrorBoundary>
+            <AuthProvider>
+              <CartProvider>
+                {children}
+                <Toaster />
+                <DevConfigCheck />
+                <DeploymentDebug />
+                <AuthDiagnostics />
+              </CartProvider>
+            </AuthProvider>
+          </AuthErrorBoundary>
         </ThemeProvider>
         <Analytics />
       </body>

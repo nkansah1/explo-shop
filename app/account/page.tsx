@@ -17,6 +17,17 @@ export default function AccountPage() {
   const { orders } = useCart()
   const router = useRouter()
 
+  const handleLogout = async () => {
+    try {
+      console.log('Account: Logout button clicked')
+      await logout()
+      console.log('Account: Logout completed successfully')
+      router.push('/')
+    } catch (error) {
+      console.error('Account: Logout failed:', error)
+    }
+  }
+
   useEffect(() => {
     if (!user) {
       router.push("/login")
@@ -149,7 +160,7 @@ export default function AccountPage() {
             <Separator className="my-6" />
 
             <div className="flex justify-end">
-              <Button variant="destructive" onClick={logout}>
+              <Button variant="destructive" onClick={handleLogout}>
                 Sign Out
               </Button>
             </div>
